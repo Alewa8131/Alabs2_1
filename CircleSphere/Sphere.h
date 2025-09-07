@@ -9,6 +9,8 @@ public:
     Sphere(int);
     Sphere(int, int, int);
     Sphere(int, int, int, int);
+    Sphere(const Point&);
+    Sphere(const Point&, int, int);
     Sphere(const Point3D&);
     Sphere(const Point3D&, int);
     Sphere(const Circle&);
