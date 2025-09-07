@@ -145,6 +145,146 @@ bool test_point3d_from_point_and_param_constructor() {
         TestSystem::check(p3d.get_coord_z(), 25);
 }
 
+
+bool test_circle_default_constructor() {
+    Circle c;
+    return TestSystem::check(c.get_coord_x(), 0) &&
+        TestSystem::check(c.get_coord_y(), 0) &&
+        TestSystem::check(c.get_radius(), 1);
+}
+bool test_circle_one_param_constructor() {
+    Circle c(5);
+    return TestSystem::check(c.get_coord_x(), 0) &&
+        TestSystem::check(c.get_coord_y(), 0) &&
+        TestSystem::check(c.get_radius(), 5);
+}
+bool test_circle_two_param_constructor() {
+    Circle c(10, 20);
+    return TestSystem::check(c.get_coord_x(), 10) &&
+        TestSystem::check(c.get_coord_y(), 20) &&
+        TestSystem::check(c.get_radius(), 1);
+}
+bool test_circle_three_param_constructor() {
+    Circle c(10, 20, 5);
+    return TestSystem::check(c.get_coord_x(), 10) &&
+        TestSystem::check(c.get_coord_y(), 20) &&
+        TestSystem::check(c.get_radius(), 5);
+}
+bool test_circle_from_point_constructor() {
+    Point p(15, 25);
+    Circle c(p);
+    return TestSystem::check(c.get_coord_x(), 15) &&
+        TestSystem::check(c.get_coord_y(), 25) &&
+        TestSystem::check(c.get_radius(), 1);
+}
+bool test_circle_from_point_and_radius_constructor() {
+    Point p(15, 25);
+    Circle c(p, 7);
+    return TestSystem::check(c.get_coord_x(), 15) &&
+        TestSystem::check(c.get_coord_y(), 25) &&
+        TestSystem::check(c.get_radius(), 7);
+}
+bool test_circle_copy_constructor() {
+    Circle c1(10, 20, 5);
+    Circle c2(c1);
+    return TestSystem::check(c1.get_coord_x(), 10) &&
+        TestSystem::check(c1.get_coord_y(), 20) &&
+        TestSystem::check(c1.get_radius(), 5) &&
+        TestSystem::check(c2.get_coord_x(), 10) &&
+        TestSystem::check(c2.get_coord_y(), 20) &&
+        TestSystem::check(c2.get_radius(), 5);
+}
+
+bool test_sphere_default_constructor() {
+    Sphere s;
+    return TestSystem::check(s.get_coord_x(), 0) &&
+        TestSystem::check(s.get_coord_y(), 0) &&
+        TestSystem::check(s.get_coord_z(), 0) &&
+        TestSystem::check(s.get_radius(), 1);
+}
+bool test_sphere_one_param_constructor() {
+    Sphere s(5);
+    return TestSystem::check(s.get_coord_x(), 0) &&
+        TestSystem::check(s.get_coord_y(), 0) &&
+        TestSystem::check(s.get_coord_z(), 0) &&
+        TestSystem::check(s.get_radius(), 5);
+}
+bool test_sphere_three_param_constructor() {
+    Sphere s(10, 20, 30);
+    return TestSystem::check(s.get_coord_x(), 10) &&
+        TestSystem::check(s.get_coord_y(), 20) &&
+        TestSystem::check(s.get_coord_z(), 30) &&
+        TestSystem::check(s.get_radius(), 1);
+}
+bool test_sphere_four_param_constructor() {
+    Sphere s(10, 20, 30, 5);
+    return TestSystem::check(s.get_coord_x(), 10) &&
+        TestSystem::check(s.get_coord_y(), 20) &&
+        TestSystem::check(s.get_coord_z(), 30) &&
+        TestSystem::check(s.get_radius(), 5);
+}
+bool test_sphere_from_point_constructor() {
+    Point p(15, 25);
+    Sphere s(p);
+    return TestSystem::check(s.get_coord_x(), 15) &&
+        TestSystem::check(s.get_coord_y(), 25) &&
+        TestSystem::check(s.get_coord_z(), 0) &&
+        TestSystem::check(s.get_radius(), 1);
+}
+bool test_sphere_from_point_and_z_coord_and_radius_constructor() {
+    Point p(15, 25);
+    Sphere s(p, 35, 7);
+    return TestSystem::check(s.get_coord_x(), 15) &&
+        TestSystem::check(s.get_coord_y(), 25) &&
+        TestSystem::check(s.get_coord_z(), 35) &&
+        TestSystem::check(s.get_radius(), 7);
+}
+bool test_sphere_from_point3d_constructor() {
+    Point3D p(15, 25, 35);
+    Sphere s(p);
+    return TestSystem::check(s.get_coord_x(), 15) &&
+        TestSystem::check(s.get_coord_y(), 25) &&
+        TestSystem::check(s.get_coord_z(), 35) &&
+        TestSystem::check(s.get_radius(), 1);
+}
+bool test_sphere_from_point3d_and_radius_constructor() {
+    Point3D p(15, 25, 35);
+    Sphere s(p, 7);
+    return TestSystem::check(s.get_coord_x(), 15) &&
+        TestSystem::check(s.get_coord_y(), 25) &&
+        TestSystem::check(s.get_coord_z(), 35) &&
+        TestSystem::check(s.get_radius(), 7);
+}
+bool test_sphere_from_circle_constructor() {
+    Circle c(10, 20, 5);
+    Sphere s(c);
+    return TestSystem::check(s.get_coord_x(), 10) &&
+        TestSystem::check(s.get_coord_y(), 20) &&
+        TestSystem::check(s.get_coord_z(), 0) &&
+        TestSystem::check(s.get_radius(), 5);
+}
+bool test_sphere_from_circle_and_z_constructor() {
+    Circle c(10, 20, 5);
+    Sphere s(c, 30);
+    return TestSystem::check(s.get_coord_x(), 10) &&
+        TestSystem::check(s.get_coord_y(), 20) &&
+        TestSystem::check(s.get_coord_z(), 30) &&
+        TestSystem::check(s.get_radius(), 5);
+}
+bool test_sphere_copy_constructor() {
+    Sphere s1(10, 20, 30, 5);
+    Sphere s2(s1);
+    return TestSystem::check(s1.get_coord_x(), 10) &&
+        TestSystem::check(s1.get_coord_y(), 20) &&
+        TestSystem::check(s1.get_coord_z(), 30) &&
+        TestSystem::check(s1.get_radius(), 5) &&
+        TestSystem::check(s2.get_coord_x(), 10) &&
+        TestSystem::check(s2.get_coord_y(), 20) &&
+        TestSystem::check(s2.get_coord_z(), 30) &&
+        TestSystem::check(s2.get_radius(), 5);
+}
+
+
 int main() {
     TestSystem::print_init_info();
 
@@ -160,6 +300,27 @@ int main() {
     RUN_TEST(test_point3d_copy_constructor);
     RUN_TEST(test_point3d_from_point_constructor);
     RUN_TEST(test_point3d_from_point_and_param_constructor);
+
+
+    RUN_TEST(test_circle_default_constructor);
+    RUN_TEST(test_circle_one_param_constructor);
+    RUN_TEST(test_circle_two_param_constructor);
+    RUN_TEST(test_circle_three_param_constructor);
+    RUN_TEST(test_circle_from_point_constructor);
+    RUN_TEST(test_circle_from_point_and_radius_constructor);
+    RUN_TEST(test_circle_copy_constructor);
+
+    RUN_TEST(test_sphere_default_constructor);
+    RUN_TEST(test_sphere_one_param_constructor);
+    RUN_TEST(test_sphere_three_param_constructor);
+    RUN_TEST(test_sphere_four_param_constructor);
+    RUN_TEST(test_sphere_from_point_constructor);
+    RUN_TEST(test_sphere_from_point_and_z_coord_and_radius_constructor);
+    RUN_TEST(test_sphere_from_point3d_constructor);
+    RUN_TEST(test_sphere_from_point3d_and_radius_constructor);
+    RUN_TEST(test_sphere_from_circle_constructor);
+    RUN_TEST(test_sphere_from_circle_and_z_constructor);
+    RUN_TEST(test_sphere_copy_constructor);
 
     TestSystem::print_final_info();
     return 0;
