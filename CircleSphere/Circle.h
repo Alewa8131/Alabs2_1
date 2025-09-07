@@ -1,8 +1,8 @@
 #pragma once
 #include "Point.h"
 
-class Circle {
-    int _x, _y, _r;
+class Circle : public Point {
+    int _r;
 public:
     Circle();
     Circle(int);
@@ -12,7 +12,5 @@ public:
     Circle(const Point&, int);
     Circle(const Circle&);
 
-    int get_coord_x() const;
-    int get_coord_y() const;
     int get_radius() const;
 };
