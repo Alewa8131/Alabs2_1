@@ -285,6 +285,102 @@ bool test_sphere_copy_constructor() {
 }
 
 
+
+
+template <class T>
+int check_position(T& obj1, T& obj2) {
+    double distance = obj1.get_distance(obj2);
+    double sum_radius = obj1.get_radius() + obj2.get_radius();
+    double diff_radius = std::abs(obj1.get_radius() - obj2.get_radius());
+
+    if (distance == 0 && obj1.get_radius() == obj2.get_radius()) {
+        return 0; // "The objects match."
+    }
+    else if (distance < diff_radius) {
+        return 1; // "One object is nested inside another and does not touch." << std::endl;
+    }
+    else if (distance == diff_radius) {
+        return 2; // "The objects touch in an internal way." << std::endl;
+    }
+    else if (distance < sum_radius) {
+        return 3; // "The objects intersect." << std::endl;
+    }
+    else if (distance == sum_radius) {
+        return 4; // "The objects touch in an external way." << std::endl;
+    }
+    else {
+        return 5; // "The objects are separate." << std::endl;
+    }
+}
+
+
+
+
+bool test_circles_identical() {
+    Circle c1(0, 0, 5);
+    Circle c2(0, 0, 5);
+    return TestSystem::check(check_position(c1, c2), 0);
+}
+bool test_circles_contained() {
+    Circle c1(0, 0, 10);
+    Circle c2(2, 0, 5);
+    return TestSystem::check(check_position(c1, c2), 1);
+}
+bool test_circles_internal_touch() {
+    Circle c1(0, 0, 10);
+    Circle c2(5, 0, 5);
+    return TestSystem::check(check_position(c1, c2), 2);
+}
+bool test_circles_intersect() {
+    Circle c1(0, 0, 5);
+    Circle c2(7, 0, 5);
+    return TestSystem::check(check_position(c1, c2), 3);
+}
+bool test_circles_external_touch() {
+    Circle c1(0, 0, 5);
+    Circle c2(10, 0, 5);
+    return TestSystem::check(check_position(c1, c2), 4);
+}
+bool test_circles_separate() {
+    Circle c1(0, 0, 5);
+    Circle c2(12, 0, 5);
+    return TestSystem::check(check_position(c1, c2), 5);
+}
+
+
+bool test_spheres_identical() {
+    Sphere s1(0, 0, 0, 5);
+    Sphere s2(0, 0, 0, 5);
+    return TestSystem::check(check_position(s1, s2), 0);
+}
+bool test_spheres_contained() {
+    Sphere s1(0, 0, 0, 10);
+    Sphere s2(2, 0, 0, 5);
+    return TestSystem::check(check_position(s1, s2), 1);
+}
+bool test_spheres_internal_touch() {
+    Sphere s1(0, 0, 0, 10);
+    Sphere s2(5, 0, 0, 5);
+    return TestSystem::check(check_position(s1, s2), 2);
+}
+bool test_spheres_intersect() {
+    Sphere s1(0, 0, 0, 5);
+    Sphere s2(7, 0, 0, 5);
+    return TestSystem::check(check_position(s1, s2), 3);
+}
+bool test_spheres_external_touch() {
+    Sphere s1(0, 0, 0, 5);
+    Sphere s2(10, 0, 0, 5);
+    return TestSystem::check(check_position(s1, s2), 4);
+}
+bool test_spheres_separate() {
+    Sphere s1(0, 0, 0, 5);
+    Sphere s2(12, 0, 0, 5);
+    return TestSystem::check(check_position(s1, s2), 5);
+}
+
+
+
 int main() {
     TestSystem::print_init_info();
 
@@ -321,6 +417,21 @@ int main() {
     RUN_TEST(test_sphere_from_circle_constructor);
     RUN_TEST(test_sphere_from_circle_and_z_constructor);
     RUN_TEST(test_sphere_copy_constructor);
+
+
+    RUN_TEST(test_circles_identical);
+    RUN_TEST(test_circles_contained);
+    RUN_TEST(test_circles_internal_touch);
+    RUN_TEST(test_circles_intersect);
+    RUN_TEST(test_circles_external_touch);
+    RUN_TEST(test_circles_separate);
+
+    RUN_TEST(test_spheres_identical);
+    RUN_TEST(test_spheres_contained);
+    RUN_TEST(test_spheres_internal_touch);
+    RUN_TEST(test_spheres_intersect);
+    RUN_TEST(test_spheres_external_touch);
+    RUN_TEST(test_spheres_separate);
 
     TestSystem::print_final_info();
     return 0;

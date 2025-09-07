@@ -13,4 +13,5 @@ public:
     Circle(const Circle&);
 
     int get_radius() const;
+    double get_distance(const Circle&);
 };

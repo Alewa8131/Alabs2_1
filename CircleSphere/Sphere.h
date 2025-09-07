@@ -18,4 +18,5 @@ public:
     Sphere(const Sphere&);
 
     int get_coord_z() const;
+    double get_distance(const Sphere&);
 };

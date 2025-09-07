@@ -1,4 +1,5 @@
 #include "Sphere.h"
+#include <cmath>
 
 Sphere::Sphere() : Circle(), _z(0) {}
 Sphere::Sphere(int r) : Circle(r), _z(0) {}
@@ -18,3 +19,9 @@ Sphere::Sphere(const Sphere& c) : Circle(c), _z(c.get_coord_z()) {}
 
 
 int Sphere::get_coord_z() const { return _z; }
+double Sphere::get_distance(const Sphere& obj2) {
+    double dx = obj2.get_coord_x() - this->get_coord_x();
+    double dy = obj2.get_coord_y() - this->get_coord_y();
+    double dz = obj2.get_coord_z() - this->get_coord_z();
+    return std::sqrt(dx * dx + dy * dy + dz * dz);
+}
